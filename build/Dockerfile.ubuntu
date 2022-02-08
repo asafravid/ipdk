@@ -15,9 +15,9 @@ SHELL ["/bin/bash", "-c"]
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 # Installing dependent packages required for DPDK Build
-RUN apt-get update
+RUN echo "nameserver 10.5.102.111" >> /etc/resolv.conf && apt-get update
 
-RUN apt-get install -y apt-utils \
+RUN echo "nameserver 10.5.102.111" >> /etc/resolv.conf && apt-get install -y apt-utils \
     git \
     libtool \
     clang \
@@ -65,7 +65,7 @@ RUN apt-get install -y apt-utils \
     apt-get -y clean all
 
 # Installing all PYTHON packages
-RUN python3 -m pip install --no-cache-dir --upgrade pip && \
+RUN echo "nameserver 10.5.102.111" >> /etc/resolv.conf && python3 -m pip install --no-cache-dir --upgrade pip && \
     python3 -m pip install --no-cache-dir grpcio && \
     python3 -m pip install --no-cache-dir ovspy \
     protobuf \
@@ -85,5 +85,5 @@ COPY ./examples /root/examples
 COPY ./start_p4ovs.sh /root/start_p4ovs.sh
 COPY ./run_ovs_cmds /root/run_ovs_cmds
 COPY ./patches /root/patches
-RUN  /root/start_p4ovs.sh /root && \
+RUN  echo "nameserver 10.5.102.111" >> /etc/resolv.conf && /root/start_p4ovs.sh /root && \
      /root/scripts/run_cleanup.sh /root ${KEEP_SOURCE_CODE}
