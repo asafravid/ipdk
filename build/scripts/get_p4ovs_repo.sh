@@ -16,4 +16,4 @@ echo "Removing P4-OVS directory if it already exits"
 if [ -d "P4-OVS" ]; then rm -Rf P4-OVS; fi
 echo "Cloning P4-OVS repo"
 cd "$WORKDIR" || exit
-git clone https://github.com/ipdk-io/ovs.git -b ovs-with-p4 --recursive P4-OVS
+git clone https://github.com/asafravid/ovs.git -b ovs-with-p4 --recursive P4-OVS
