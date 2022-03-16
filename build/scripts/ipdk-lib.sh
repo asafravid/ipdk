@@ -60,13 +60,13 @@ get_distro_image() {
 	local RELEASE=$1
 	local IMAGE_LOCATION=$2
 	local BASE_URL="https://cloud-images.ubuntu.com/daily/server"
-	local ORIGIN_FNAME="$RELEASE-server-cloudimg-amd64.img"
+	local ORIGIN_FNAME="$RELEASE-server-cloudimg-arm64.img"
 	local DEST_FNAME="$IMAGE_LOCATION/$ORIGIN_FNAME"
 
 	# trusty and xenial have a '-disk1.img' while
 	# other releases have just 'disk.img'
 	case "$RELEASE" in
-		precise|trusty|xenial) ORIGIN_FNAME="$RELEASE-server-cloudimg-amd64-disk1.img";;
+		precise|trusty|xenial) ORIGIN_FNAME="$RELEASE-server-cloudimg-arm64-disk1.img";;
 	esac
 
 	# download file to given destination if not already there
@@ -85,7 +85,7 @@ get_distro_image() {
 create_images() {
 	# input arguments
 	local IMAGE_LOCATION=$1
-	local DIST_FNAME="focal-server-cloudimg-amd64.img"
+	local DIST_FNAME="focal-server-cloudimg-arm64.img"
 
 	print_banner "Get Ubuntu focal base image"
 
